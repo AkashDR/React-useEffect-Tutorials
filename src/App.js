@@ -1,11 +1,22 @@
-import React from "react";
-import "./style.css";
+import React, { useState, useEffect } from 'react';
+import './style.css';
 
 export default function App() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
-    </div>
+    <React.Fragment>
+      <div>{windowWidth}</div>
+    </React.Fragment>
   );
 }
